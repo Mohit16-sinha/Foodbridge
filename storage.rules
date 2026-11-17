@@ -1,0 +1,45 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    function isBelowMaxSize(maxSizeMB) {
+      return request.resource.size < maxSizeMB * 1024 * 1024;
+    }
+
+    // Food donation photos
+    match /food_images/{imageId} {
+      // Anyone can view food donation photos
+      allow read: if true;
+
+      // Only authenticated users (donors) can upload food photos (max 5MB, images only)
+      allow write: if isAuthenticated() && isImage() && isBelowMaxSize(5);
+    }
+
+    // NGO registration certificates & verification documents
+    match /ngo_documents/{ngoId}/{documentId} {
+      // Only the uploading NGO and platform administrators can view verification documents
+      allow read: if isAuthenticated() && (
+        request.auth.uid == ngoId || 
+        request.auth.token.admin == true
+      );
+
+      // Only the authenticated NGO can upload their verification documents (max 10MB)
+      allow write: if isAuthenticated() && request.auth.uid == ngoId && isBelowMaxSize(10);
+    }
+
+    // Default deny all other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

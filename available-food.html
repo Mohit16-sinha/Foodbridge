@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Surplus Food – FoodBridge Network</title>
+  <meta name="description" content="Browse fresh surplus meals, bakery items, fruits, and dairy available for community redistribution in your area.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          Food<span class="accent">Bridge</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="available-food.html" class="nav-link active">Available Food</a>
+          <a href="how-it-works.html" class="nav-link">How It Works</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <div class="nav-actions" id="navbar-actions">
+          <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Join FoodBridge</a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="available-food.html" class="nav-link">Available Food</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="flex gap-2 mt-4" id="mobile-nav-actions">
+        <a href="login.html" class="btn btn-outline btn-full">Login</a>
+        <a href="register.html" class="btn btn-primary btn-full">Join FoodBridge</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section style="background: radial-gradient(circle at 85% 20%, rgba(234, 244, 232, 0.9) 0%, rgba(248, 247, 240, 0.6) 100%); padding: 3rem 0 2.5rem;">
+    <div class="container text-center">
+      <span class="section-tag">Surplus Directory</span>
+      <h1 class="section-title">Explore Available Food Donations</h1>
+      <p class="section-subtitle" style="max-width: 650px; margin: 0 auto;">
+        Browse surplus items currently offered by local restaurants, bakeries, and caterers. Registered charities can claim portions immediately.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content & Filters -->
+  <section style="padding: 3rem 0 5rem;">
+    <div class="container">
+
+      <!-- Filter Controls Bar -->
+      <div class="card mb-6" style="padding: 1.25rem;">
+        <div class="flex flex-wrap gap-4 items-center justify-between">
+          <div class="filter-bar-search">
+            <div class="input-icon-wrapper">
+              <i class="fa-solid fa-magnifying-glass input-icon"></i>
+              <input type="text" id="public-search" class="form-control" placeholder="Search by food name, donor, or keywords...">
+            </div>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <select id="public-category" class="form-select" style="width: 170px;">
+              <option value="All">All Categories</option>
+              <option value="Cooked Food">Cooked Food</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Dairy Products">Dairy Products</option>
+              <option value="Packaged Food">Packaged Food</option>
+            </select>
+
+            <select id="public-city" class="form-select" style="width: 160px;">
+              <option value="All">All Cities</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="Oakland">Oakland</option>
+              <option value="San Jose">San Jose</option>
+            </select>
+
+            <select id="public-sort" class="form-select" style="width: 180px;">
+              <option value="deadline">Pickup Deadline (Urgent)</option>
+              <option value="newest">Newest First</option>
+              <option value="quantity">Largest Quantity</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive OpenStreetMap View -->
+      <div class="card mb-8">
+        <div class="card-header">
+          <div style="font-weight: 700; color: var(--color-primary); font-size: var(--font-size-base);">
+            <i class="fa-solid fa-map-location-dot text-secondary"></i> Interactive Pickup Map
+          </div>
+          <span class="badge badge-success" id="map-counter-badge">Active Donations Nearby</span>
+        </div>
+        <div id="public-map" class="map-container" style="height: 340px;"></div>
+      </div>
+
+      <!-- Food Grid -->
+      <div class="food-cards-grid" id="public-food-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div id="public-food-empty" class="empty-state" style="display: none;">
+        <div class="empty-state-icon"><i class="fa-solid fa-utensils"></i></div>
+        <h4 class="empty-state-title">No Matching Food Listings</h4>
+        <p class="empty-state-desc">Try adjusting your search criteria or checking back soon as donors publish fresh surplus daily.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Food Details & Safety Modal -->
+  <div class="modal-backdrop" id="food-details-modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="detail-food-name">Food Details</h3>
+        <button class="modal-close-btn" data-close-modal="food-details-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="grid grid-cols-2 gap-6" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+          <div>
+            <img id="detail-image" src="" alt="Food" style="width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 1rem;">
+            <div id="detail-storage-badge" class="badge badge-info mb-2"></div>
+            <div id="detail-category-badge" class="badge badge-primary mb-2"></div>
+          </div>
+          <div>
+            <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.5rem;" id="detail-donor-name">Donor</h4>
+            <p id="detail-description" style="font-size: var(--font-size-sm); color: var(--color-muted); line-height: 1.6; margin-bottom: 1rem;"></p>
+            
+            <div style="background: var(--color-bg); padding: 0.85rem; border-radius: var(--radius-md); font-size: var(--font-size-xs); margin-bottom: 1rem;">
+              <div class="mb-1"><strong>Available Quantity:</strong> <span id="detail-qty" class="text-success font-bold"></span></div>
+              <div class="mb-1"><strong>Pickup Location:</strong> <span id="detail-location"></span></div>
+              <div class="mb-1"><strong>Pickup Deadline:</strong> <span id="detail-deadline" class="text-danger font-bold"></span></div>
+              <div class="mb-1"><strong>Allergens:</strong> <span id="detail-allergens"></span></div>
+            </div>
+
+            <div style="padding: 0.75rem; background: #FEFCBF; border: 1px solid #D69E2E; border-radius: var(--radius-md); font-size: 0.75rem; color: #744210; margin-bottom: 1rem;">
+              <i class="fa-solid fa-shield-halved"></i> <strong>Safety Certified:</strong> Donor certified compliance with safe food handling, refrigeration, and storage guidelines.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" id="report-listing-btn">
+          <i class="fa-solid fa-flag"></i> Report Listing
+        </button>
+        <button class="btn btn-primary" id="claim-food-action-btn">
+          <i class="fa-solid fa-hand-holding-heart"></i> Request Food
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Listing Modal -->
+  <div class="modal-backdrop" id="report-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Report Food Listing</h3>
+        <button class="modal-close-btn" data-close-modal="report-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: var(--font-size-sm); color: var(--color-muted); margin-bottom: 1rem;">
+          Help maintain community trust. If this listing violates food safety, contains inaccurate information, or expired items, let us know.
+        </p>
+        <form id="report-form">
+          <input type="hidden" id="report-listing-id">
+          <div class="form-group">
+            <label class="form-label">Reason for Report</label>
+            <select id="report-reason" class="form-select" required>
+              <option value="Food Safety Concern">Food Safety or Hygiene Concern</option>
+              <option value="Expired Listing">Item Already Expired / Spoiled</option>
+              <option value="Inaccurate Information">Inaccurate Quantity or Details</option>
+              <option value="Unreachable Donor">Donor Unreachable at Pickup</option>
+              <option value="Other">Other Policy Issue</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Details / Observations</label>
+            <textarea id="report-details" class="form-textarea" rows="3" placeholder="Describe the issue..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-danger btn-full">Submit Safety Report</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+            Food<span class="accent">Bridge</span>
+          </a>
+          <p>Connecting surplus food with communities that need it. Donate, volunteer, and build a world with less waste.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <div class="footer-links">
+            <a href="available-food.html">Available Food</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Portals</h4>
+          <div class="footer-links">
+            <a href="donor/dashboard.html">Donor Dashboard</a>
+            <a href="ngo/dashboard.html">NGO Portal</a>
+            <a href="volunteer/dashboard.html">Volunteer Portal</a>
+            <a href="admin/dashboard.html">Admin Oversight</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Safety</h4>
+          <div class="footer-links">
+            <a href="about.html">Safety Declarations</a>
+            <a href="contact.html">Report Food Safety</a>
+            <a href="about.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 FoodBridge Surplus Food Network. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/seed-data.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    let publicMap = null;
+    let mapMarkers = [];
+    let selectedListingId = null;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      initPublicMap();
+      await renderPublicListings();
+
+      // Filter events
+      document.getElementById("public-search").addEventListener("input", debounce(renderPublicListings, 250));
+      document.getElementById("public-category").addEventListener("change", renderPublicListings);
+      document.getElementById("public-city").addEventListener("change", renderPublicListings);
+      document.getElementById("public-sort").addEventListener("change", renderPublicListings);
+
+      // Report Button
+      document.getElementById("report-listing-btn").addEventListener("click", () => {
+        window.closeModal("food-details-modal");
+        document.getElementById("report-listing-id").value = selectedListingId;
+        window.openModal("report-modal");
+      });
+
+      // Report Form Submission
+      document.getElementById("report-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const listingId = document.getElementById("report-listing-id").value;
+        const reason = document.getElementById("report-reason").value;
+        const details = document.getElementById("report-details").value;
+
+        const user = window.foodShareAuth.getCurrentUser();
+        await window.foodShareDB.createReport({
+          listingId,
+          reason,
+          description: details,
+          reporterId: user ? user.id : "anonymous"
+        });
+
+        window.closeModal("report-modal");
+        window.showToast("Report submitted to administrator for safety review.", "info");
+      });
+
+      // Claim / Request Button
+      document.getElementById("claim-food-action-btn").addEventListener("click", () => {
+        const user = window.foodShareAuth.getCurrentUser();
+        if (!user) {
+          window.location.href = `login.html?redirect=ngo/available-food.html`;
+        } else if (user.role === 'ngo') {
+          window.location.href = `ngo/available-food.html`;
+        } else {
+          window.showToast(`You are logged in as a ${user.role}. Please log in with a verified NGO account to request food.`, "warning");
+        }
+      });
+    });
+
+    function initPublicMap() {
+      if (typeof L === 'undefined') return;
+      publicMap = L.map("public-map").setView([37.7749, -122.4194], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(publicMap);
+    }
+
+    async function renderPublicListings() {
+      const search = document.getElementById("public-search").value;
+      const category = document.getElementById("public-category").value;
+      const city = document.getElementById("public-city").value;
+      const sortBy = document.getElementById("public-sort").value;
+
+      const listings = await window.foodShareDB.getFoodListings({
+        availableOnly: true,
+        search,
+        category,
+        city,
+        sortBy
+      });
+
+      const container = document.getElementById("public-food-grid");
+      const emptyState = document.getElementById("public-food-empty");
+      const badge = document.getElementById("map-counter-badge");
+
+      if (badge) badge.textContent = `${listings.length} Active Donations`;
+
+      // Update Map Markers
+      if (publicMap) {
+        mapMarkers.forEach(m => publicMap.removeLayer(m));
+        mapMarkers = [];
+        const bounds = [];
+
+        listings.forEach(l => {
+          const lat = l.lat || (37.7749 + (Math.random() - 0.5) * 0.04);
+          const lng = l.lng || (-122.4194 + (Math.random() - 0.5) * 0.04);
+          const marker = L.marker([lat, lng]).addTo(publicMap);
+          marker.bindPopup(`
+            <div style="font-family: var(--font-family); padding: 4px;">
+              <strong style="color: #173F35;">${l.foodName}</strong>
+              <div style="font-size: 0.75rem; color: #718078;">${l.donorName}</div>
+              <div style="color: #2F855A; font-weight: 700; margin: 4px 0;">${l.availableQuantity} ${l.unit}</div>
+              <button class="btn btn-primary btn-sm btn-full" onclick="openPublicDetailsModal('${l.id}')">View Details</button>
+            </div>
+          `);
+          mapMarkers.push(marker);
+          bounds.push([lat, lng]);
+        });
+
+        if (bounds.length > 0) {
+          publicMap.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+        }
+      }
+
+      if (listings.length === 0) {
+        container.innerHTML = "";
+        emptyState.style.display = "block";
+        return;
+      }
+
+      emptyState.style.display = "none";
+      container.innerHTML = listings.map(l => {
+        const deadlineDate = new Date(l.pickupDeadline).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' });
+        return `
+          <div class="food-card">
+            <div class="food-card-image-wrap">
+              <img src="${l.imageUrl}" alt="${l.foodName}" loading="lazy">
+              <div class="food-card-badges">
+                <span class="food-badge-category">${l.category}</span>
+                <span class="food-badge-storage"><i class="fa-regular fa-snowflake"></i> ${l.storageType}</span>
+              </div>
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-title">${l.foodName}</h3>
+              <div class="food-card-donor"><i class="fa-solid fa-store"></i> ${l.donorName}</div>
+              <div class="food-card-meta-grid">
+                <div class="food-meta-item">
+                  <span class="food-meta-label">Available</span>
+                  <span class="food-meta-value qty">${l.availableQuantity} ${l.unit}</span>
+                </div>
+                <div class="food-meta-item">
+                  <span class="food-meta-label">Location</span>
+                  <span class="food-meta-value">${l.city}</span>
+                </div>
+              </div>
+              <div class="food-card-deadline safe">
+                <i class="fa-regular fa-clock"></i> Pickup by: ${deadlineDate}
+              </div>
+              <div class="food-card-allergens">
+                ${(l.allergens || ["None"]).map(a => `<span class="allergen-tag">${a}</span>`).join("")}
+              </div>
+              <div class="food-card-footer">
+                <button class="btn btn-primary btn-full btn-sm" onclick="openPublicDetailsModal('${l.id}')">
+                  <i class="fa-solid fa-circle-info"></i> View Details & Request
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    window.openPublicDetailsModal = async function(listingId) {
+      selectedListingId = listingId;
+      const listing = await window.foodShareDB.getFoodListingById(listingId);
+      if (!listing) return;
+
+      document.getElementById("detail-food-name").textContent = listing.foodName;
+      document.getElementById("detail-donor-name").textContent = `Offered by: ${listing.donorName}`;
+      document.getElementById("detail-description").textContent = listing.description || "Fresh surplus meal prepared under commercial sanitation protocols.";
+      document.getElementById("detail-image").src = listing.imageUrl;
+      document.getElementById("detail-qty").textContent = `${listing.availableQuantity} / ${listing.quantity} ${listing.unit}`;
+      document.getElementById("detail-location").textContent = `${listing.location}, ${listing.city}`;
+      document.getElementById("detail-deadline").textContent = new Date(listing.pickupDeadline).toLocaleString();
+      document.getElementById("detail-allergens").textContent = (listing.allergens || ["None"]).join(", ");
+      document.getElementById("detail-storage-badge").textContent = `Storage: ${listing.storageType}`;
+      document.getElementById("detail-category-badge").textContent = listing.category;
+
+      window.openModal("food-details-modal");
+    };
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+      };
+    }
+  </script>
+</body>
+</html>
+

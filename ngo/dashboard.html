@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGO Dashboard – FoodBridge</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          FoodBridge
+        </a>
+        <span class="sidebar-role-badge">NGO</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-title">Menu</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <i class="fa-solid fa-gauge-high"></i> Overview
+        </a>
+        <a href="available-food.html" class="sidebar-link">
+          <i class="fa-solid fa-bowl-food"></i> Browse Available Food
+        </a>
+        <a href="my-requests.html" class="sidebar-link">
+          <i class="fa-solid fa-hand-holding-heart"></i> My Food Requests
+        </a>
+        <a href="received-donations.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> Received Donations
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <i class="fa-solid fa-id-badge"></i> Organization Profile
+        </a>
+
+        <div class="sidebar-nav-title" style="margin-top: 1rem;">Public Site</div>
+        <a href="../available-food.html" class="sidebar-link">
+          <i class="fa-solid fa-map-location-dot"></i> Live Public Map
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar current-user-avatar">N</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name current-user-name">Loading...</div>
+            <div class="sidebar-user-role current-user-role">NGO Partner</div>
+          </div>
+          <button class="sidebar-logout-btn logout-trigger" title="Log Out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div class="dashboard-header-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h1 class="dashboard-page-title">NGO Charity Dashboard</h1>
+        </div>
+
+        <div class="dashboard-header-right">
+          <a href="available-food.html" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-magnifying-glass"></i> Browse Food
+          </a>
+
+          <div class="notification-bell-wrapper">
+            <button class="notification-bell-btn" id="notification-bell-btn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notification-unread-count" id="notification-unread-count" style="display: none;">0</span>
+            </button>
+            <div class="notification-dropdown" id="notification-dropdown">
+              <div class="notification-dropdown-header">
+                <h4>Notifications</h4>
+                <button class="btn btn-ghost btn-sm" id="mark-all-read-btn">Mark all read</button>
+              </div>
+              <div class="notification-list" id="notification-list"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- Metric Cards -->
+        <div class="stat-cards-grid">
+          <div class="stat-card blue">
+            <div class="stat-card-icon"><i class="fa-solid fa-bowl-food"></i></div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" id="stat-available-donations">0</div>
+              <div class="stat-card-label">Available Donations Nearby</div>
+            </div>
+          </div>
+
+          <div class="stat-card gold">
+            <div class="stat-card-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" id="stat-pending-requests">0</div>
+              <div class="stat-card-label">Pending Donor Review</div>
+            </div>
+          </div>
+
+          <div class="stat-card green">
+            <div class="stat-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" id="stat-approved-requests">0</div>
+              <div class="stat-card-label">Approved & In Transit</div>
+            </div>
+          </div>
+
+          <div class="stat-card green">
+            <div class="stat-card-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" id="stat-received-donations">0</div>
+              <div class="stat-card-label">Received Distributions</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Requests Tracker Table -->
+        <div class="card mb-8">
+          <div class="card-header">
+            <div>
+              <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--color-primary); margin: 0;">
+                <i class="fa-solid fa-truck-ramp-box text-secondary"></i> Active Food Requests
+              </h2>
+              <div style="font-size: var(--font-size-xs); color: var(--color-muted);">
+                Monitor pending reviews and courier transit status.
+              </div>
+            </div>
+            <a href="my-requests.html" class="btn btn-outline btn-sm">View Full History</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Food Item</th>
+                  <th>Donor</th>
+                  <th>Quantity Claimed</th>
+                  <th>Workflow Status</th>
+                  <th>Requested</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="active-requests-tbody">
+                <!-- Injected via ngo.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="active-requests-empty" class="empty-state" style="display: none; border: none; padding: 2.5rem;">
+            <div class="empty-state-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <h4 class="empty-state-title">No Active Requests</h4>
+            <p class="empty-state-desc">You have no active requests in progress. Browse surplus food to claim donations for your kitchen.</p>
+            <a href="available-food.html" class="btn btn-primary"><i class="fa-solid fa-bowl-food"></i> Browse Available Food</a>
+          </div>
+        </div>
+
+        <!-- Recommended Food Donations -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin: 0;">
+            Surplus Food Ready for Collection
+          </h2>
+          <a href="available-food.html" class="btn btn-outline btn-sm">Open Interactive Map</a>
+        </div>
+
+        <div class="food-cards-grid" id="available-preview-grid">
+          <!-- Injected via ngo.js -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Request Modal -->
+  <div class="modal-backdrop" id="request-food-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Request Surplus Food</h3>
+        <button class="modal-close-btn" data-close-modal="request-food-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="request-food-form">
+          <input type="hidden" id="request-listing-id">
+
+          <div style="background: var(--color-bg); padding: 1rem; border-radius: var(--radius-md); font-size: var(--font-size-xs); margin-bottom: 1.25rem;">
+            <div class="mb-1"><strong>Item:</strong> <span id="modal-food-name" class="font-bold text-primary"></span></div>
+            <div class="mb-1"><strong>Donor Kitchen:</strong> <span id="modal-donor-name"></span></div>
+            <div class="mb-1"><strong>Available Quantity:</strong> <span id="modal-available-qty" class="text-success font-bold"></span></div>
+            <div class="mb-1"><strong>Pickup Location:</strong> <span id="modal-pickup-location"></span></div>
+            <div class="mb-1"><strong>Must Pickup By:</strong> <span id="modal-deadline" class="text-danger font-bold"></span></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="request-quantity">
+              Quantity Needed (<span id="modal-unit-label">portions</span>) <span class="required">*</span>
+            </label>
+            <input type="number" id="request-quantity" class="form-control" min="1" required>
+            <div class="form-hint">Specify exact portion quantity required to prevent food waste.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="request-message">Message to Food Donor</label>
+            <textarea id="request-message" class="form-textarea" rows="3" placeholder="Tell the donor about your meal service, recipient beneficiaries, or timing needs..."></textarea>
+          </div>
+
+          <div class="card mb-4" style="padding: 0.85rem; background: var(--color-light-green); border-color: rgba(47, 133, 90, 0.2); font-size: 0.75rem; color: var(--color-primary);">
+            <i class="fa-solid fa-truck"></i> <strong>Automatic Logistics:</strong> Once the donor approves your request, FoodBridge dispatches a registered volunteer courier to transport the food directly to your organization.
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg">
+            Confirm Request <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/seed-data.js"></script>
+  <script src="../js/db-service.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/notifications.js"></script>
+  <script src="../js/dashboard-common.js"></script>
+  <script src="../js/ngo.js"></script>
+</body>
+</html>
+

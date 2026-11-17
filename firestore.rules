@@ -1,0 +1,159 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for authentication and role verification
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function hasRole(role) {
+      return isAuthenticated() && getUserData().role == role;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        getUserData().role == 'admin' || 
+        request.auth.token.admin == true
+      );
+    }
+
+    function isApprovedNGO() {
+      return isAuthenticated() && 
+        getUserData().role == 'ngo' && 
+        getUserData().status == 'approved';
+    }
+
+    // -------------------------------------------------------------------------
+    // USERS COLLECTION
+    // -------------------------------------------------------------------------
+    match /users/{userId} {
+      // Anyone authenticated can read user profiles (needed for donors/volunteers/NGO names)
+      allow read: if isAuthenticated();
+
+      // Users can create their own profile during registration (prevent public admin registration!)
+      allow create: if isAuthenticated() && 
+                    request.auth.uid == userId && 
+                    request.resource.data.role in ['donor', 'ngo', 'volunteer'] &&
+                    (request.resource.data.role != 'ngo' || request.resource.data.status == 'pending');
+
+      // Users can update their own personal profile fields, but CANNOT elevate their role or approve themselves!
+      allow update: if isAuthenticated() && (
+        (request.auth.uid == userId && 
+         request.resource.data.role == resource.data.role && 
+         request.resource.data.status == resource.data.status) || 
+        isAdmin()
+      );
+
+      // Only admins can delete user records
+      allow delete: if isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // FOOD LISTINGS COLLECTION
+    // -------------------------------------------------------------------------
+    match /foodListings/{listingId} {
+      // Public can read available listings
+      allow read: if true;
+
+      // Donors can create listings for their own establishment
+      allow create: if isAuthenticated() && 
+                    hasRole('donor') && 
+                    request.resource.data.donorId == request.auth.uid &&
+                    request.resource.data.safetyDeclaration == true;
+
+      // Donors can update their own listings; Admins can moderate; 
+      // System/Functions adjust availableQuantity during atomic reservations
+      allow update: if (isAuthenticated() && resource.data.donorId == request.auth.uid) || 
+                       isAdmin() ||
+                       (isApprovedNGO() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['availableQuantity', 'status']));
+
+      // Only the listing donor (when no active requests) or admin can delete
+      allow delete: if (isAuthenticated() && resource.data.donorId == request.auth.uid) || isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // DONATION REQUESTS COLLECTION
+    // -------------------------------------------------------------------------
+    match /donationRequests/{requestId} {
+      // Donors, involved NGO, assigned volunteers, and admins can view request
+      allow read: if isAuthenticated() && (
+        resource.data.donorId == request.auth.uid ||
+        resource.data.ngoId == request.auth.uid ||
+        resource.data.volunteerId == request.auth.uid ||
+        isAdmin()
+      );
+
+      // Only APPROVED NGOs can create donation requests
+      allow create: if isApprovedNGO() && 
+                    request.resource.data.ngoId == request.auth.uid &&
+                    request.resource.data.status == 'pending';
+
+      // Updates:
+      // - Donors can approve or reject their incoming requests
+      // - NGOs can cancel their own pending requests
+      // - Assigned volunteer or Cloud Functions can advance status to completed
+      allow update: if isAuthenticated() && (
+        (resource.data.donorId == request.auth.uid && request.resource.data.status in ['approved', 'rejected']) ||
+        (resource.data.ngoId == request.auth.uid && resource.data.status == 'pending' && request.resource.data.status == 'cancelled') ||
+        (resource.data.volunteerId == request.auth.uid) ||
+        isAdmin()
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // VOLUNTEER TASKS COLLECTION
+    // -------------------------------------------------------------------------
+    match /volunteerTasks/{taskId} {
+      // Active volunteers and involved parties can read tasks
+      allow read: if isAuthenticated() && (
+        hasRole('volunteer') ||
+        resource.data.donorId == request.auth.uid ||
+        resource.data.ngoId == request.auth.uid ||
+        isAdmin()
+      );
+
+      // Tasks are generated automatically when a donor approves a request
+      allow create: if isAuthenticated() && (hasRole('donor') || isAdmin());
+
+      // Volunteers can only accept unassigned tasks or update their own assigned tasks
+      allow update: if isAuthenticated() && (
+        // Accept unassigned task
+        (hasRole('volunteer') && resource.data.status == 'Assigned' && request.resource.data.volunteerId == request.auth.uid) ||
+        // Advance status workflow: Accepted -> Picked Up -> Delivered -> Completed
+        (resource.data.volunteerId == request.auth.uid && request.resource.data.status in ['Accepted', 'Picked Up', 'Delivered', 'Completed']) ||
+        isAdmin()
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // -------------------------------------------------------------------------
+    // NOTIFICATIONS COLLECTION
+    // -------------------------------------------------------------------------
+    match /notifications/{notifId} {
+      // Users can only read and mark read their own notifications
+      allow read, update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // Notifications can be generated by authorized operations
+      allow create: if isAuthenticated();
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // -------------------------------------------------------------------------
+    // REPORTS COLLECTION
+    // -------------------------------------------------------------------------
+    match /reports/{reportId} {
+      // Anyone can submit a safety report
+      allow create: if true;
+      // Only admins can read, review, and resolve reports
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
+

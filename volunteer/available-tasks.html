@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Tasks – FoodBridge Volunteer Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          FoodBridge
+        </a>
+        <span class="sidebar-role-badge">Volunteer</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-title">Menu</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <i class="fa-solid fa-gauge-high"></i> Overview
+        </a>
+        <a href="available-tasks.html" class="sidebar-link active">
+          <i class="fa-solid fa-compass"></i> Available Tasks
+        </a>
+        <a href="my-tasks.html" class="sidebar-link">
+          <i class="fa-solid fa-truck-fast"></i> My Active Tasks
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> Delivery History
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <i class="fa-solid fa-id-badge"></i> Volunteer Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar current-user-avatar">V</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name current-user-name">Loading...</div>
+            <div class="sidebar-user-role current-user-role">Volunteer</div>
+          </div>
+          <button class="sidebar-logout-btn logout-trigger" title="Log Out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div class="dashboard-header-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle navigation menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h1 class="dashboard-page-title">Available Volunteer Missions</h1>
+        </div>
+
+        <div class="dashboard-header-right">
+          <div class="notification-bell-wrapper">
+            <button class="notification-bell-btn" id="notification-bell-btn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notification-unread-count" id="notification-unread-count" style="display: none;">0</span>
+            </button>
+            <div class="notification-dropdown" id="notification-dropdown">
+              <div class="notification-dropdown-header">
+                <h4>Notifications</h4>
+                <button class="btn btn-ghost btn-sm" id="mark-all-read-btn">Mark all read</button>
+              </div>
+              <div class="notification-list" id="notification-list"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <div class="card mb-6" style="padding: 1.25rem;">
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--color-primary); margin: 0 0 0.25rem;">
+            Claim a Delivery Mission
+          </h2>
+          <div style="font-size: var(--font-size-xs); color: var(--color-muted);">
+            Pick up surplus food from donor establishments and deliver them safely to community kitchens.
+          </div>
+        </div>
+
+        <div id="available-tasks-list">
+          <!-- Injected via volunteer.js -->
+        </div>
+
+        <div id="available-tasks-empty" class="empty-state" style="display: none;">
+          <div class="empty-state-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <h4 class="empty-state-title">No Unassigned Missions Right Now</h4>
+          <p class="empty-state-desc">All current food donations have volunteer couriers assigned. Check back shortly as new requests get approved!</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/seed-data.js"></script>
+  <script src="../js/db-service.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/notifications.js"></script>
+  <script src="../js/dashboard-common.js"></script>
+  <script src="../js/volunteer.js"></script>
+</body>
+</html>
+

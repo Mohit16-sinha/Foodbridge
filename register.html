@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join FoodBridge – Register New Account</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body style="background-color: var(--color-bg); min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          Food<span class="accent">Bridge</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="available-food.html" class="nav-link">Available Food</a>
+          <a href="how-it-works.html" class="nav-link">How It Works</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-outline btn-sm">Already have an account? Login</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Registration Form Container -->
+  <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3.5rem 1.5rem;">
+    <div class="card" style="width: 100%; max-width: 680px; padding: 2.75rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-glass); background: var(--glass-bg-card); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: var(--glass-border-card);">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-primary mb-2">Create Free Account</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem;">
+          Join the FoodBridge Community
+        </h1>
+        <p style="font-size: var(--font-size-sm); color: var(--color-muted);">
+          Choose your role to start donating, receiving, or delivering surplus food.
+        </p>
+      </div>
+
+      <div id="register-error-alert" class="card mb-4" style="display: none; background: #FED7D7; border-color: #FEB2B2; padding: 0.75rem 1rem; color: #9B2C2C; font-size: var(--font-size-xs);">
+        <i class="fa-solid fa-circle-exclamation"></i> <span id="register-error-text">Please review errors.</span>
+      </div>
+
+      <!-- Quick Sign up with Google -->
+      <button type="button" class="btn btn-google btn-full mb-3" id="google-register-btn">
+        <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+        </svg>
+        Sign up with Google (Using Selected Role Below)
+      </button>
+
+      <div class="auth-divider">
+        <span>or register with email & password</span>
+      </div>
+
+      <form id="register-form">
+        
+        <!-- Step 1: Role Selection Cards -->
+        <label class="form-label mb-2">Select Your Platform Role <span class="required">*</span></label>
+        <div class="grid grid-cols-3 gap-3 mb-6" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+          
+          <label class="card card-interactive role-picker-label" style="padding: 1rem; cursor: pointer; border: 2px solid var(--color-border); text-align: center;">
+            <input type="radio" name="role" value="donor" checked style="display: none;">
+            <div style="font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <strong style="display: block; font-size: var(--font-size-sm); color: var(--color-primary);">Food Donor</strong>
+            <span style="font-size: 0.7rem; color: var(--color-muted);">Restaurant / Hotel / Bakery</span>
+          </label>
+
+          <label class="card card-interactive role-picker-label" style="padding: 1rem; cursor: pointer; border: 2px solid var(--color-border); text-align: center;">
+            <input type="radio" name="role" value="ngo" style="display: none;">
+            <div style="font-size: 1.5rem; color: #3182CE; margin-bottom: 0.25rem;">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <strong style="display: block; font-size: var(--font-size-sm); color: var(--color-primary);">Verified NGO</strong>
+            <span style="font-size: 0.7rem; color: var(--color-muted);">Charity / Food Bank</span>
+          </label>
+
+          <label class="card card-interactive role-picker-label" style="padding: 1rem; cursor: pointer; border: 2px solid var(--color-border); text-align: center;">
+            <input type="radio" name="role" value="volunteer" style="display: none;">
+            <div style="font-size: 1.5rem; color: #B7791F; margin-bottom: 0.25rem;">
+              <i class="fa-solid fa-person-biking"></i>
+            </div>
+            <strong style="display: block; font-size: var(--font-size-sm); color: var(--color-primary);">Volunteer</strong>
+            <span style="font-size: 0.7rem; color: var(--color-muted);">Courier / Transport</span>
+          </label>
+
+        </div>
+
+        <!-- Dynamic NGO Verification Banner -->
+        <div id="ngo-pending-note" class="card mb-4" style="display: none; background: #FEFCBF; border-color: #D69E2E; padding: 0.85rem 1rem; font-size: var(--font-size-xs); color: #744210;">
+          <i class="fa-solid fa-shield-halved"></i> <strong>Safety & Trust Notice:</strong> 
+          NGO registrations start in <strong>Pending</strong> status until verified by platform administrators. Once approved, you can request and receive food.
+        </div>
+
+        <!-- Account Core Info -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group">
+            <label class="form-label" for="reg-name"><span id="name-label-text">Business / Restaurant Name</span> <span class="required">*</span></label>
+            <input type="text" id="reg-name" class="form-control" placeholder="e.g. Green Fork Bistro" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="reg-email" class="form-control" placeholder="name@organization.org" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group">
+            <label class="form-label" for="reg-phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="reg-phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-city">City <span class="required">*</span></label>
+            <input type="text" id="reg-city" class="form-control" value="San Francisco" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-address">Street Address <span class="required">*</span></label>
+          <input type="text" id="reg-address" class="form-control" placeholder="e.g. 45 Market St, Suite 200" required>
+        </div>
+
+        <!-- NGO Specific Fields -->
+        <div id="ngo-fields" style="display: none;">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-group">
+              <label class="form-label" for="reg-ngo-reg">Non-Profit Registration Number <span class="required">*</span></label>
+              <input type="text" id="reg-ngo-reg" class="form-control" placeholder="e.g. NGO-CA-88912">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-ngo-contact">Primary Contact Person</label>
+              <input type="text" id="reg-ngo-contact" class="form-control" placeholder="Director / Kitchen Lead">
+            </div>
+          </div>
+        </div>
+
+        <!-- Volunteer Specific Fields -->
+        <div id="volunteer-fields" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="reg-vol-vehicle">Delivery Vehicle Mode</label>
+            <select id="reg-vol-vehicle" class="form-select">
+              <option value="Car / Hatchback">Car / Hatchback</option>
+              <option value="Electric Bike / Cargo">Electric Bike / Cargo Carrier</option>
+              <option value="Scooter / Motorcycle">Scooter / Motorcycle</option>
+              <option value="Van / SUV">Van / SUV (Large Capacity)</option>
+              <option value="Foot / Walking">Walking Courier</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Passwords -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password <span class="required">*</span></label>
+            <div class="input-icon-wrapper" style="position: relative;">
+              <input type="password" id="reg-password" class="form-control" placeholder="At least 6 characters" minlength="6" required>
+              <button type="button" class="password-toggle-btn" onclick="togglePassVisibility('reg-password', this)">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">Confirm Password <span class="required">*</span></label>
+            <div class="input-icon-wrapper" style="position: relative;">
+              <input type="password" id="reg-confirm-password" class="form-control" placeholder="Repeat password" minlength="6" required>
+              <button type="button" class="password-toggle-btn" onclick="togglePassVisibility('reg-confirm-password', this)">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Admin Access Code Expander -->
+        <div style="margin: 0.75rem 0 1rem;">
+          <details style="font-size: 0.75rem; color: var(--color-muted); cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--color-primary);">Platform Staff / Admin Invite Code (Optional)</summary>
+            <div style="margin-top: 0.5rem;">
+              <input type="password" id="reg-admin-code" class="form-control" placeholder="Enter admin invite code (e.g. FOODBRIDGE_ADMIN_2026)">
+            </div>
+          </details>
+        </div>
+
+        <div class="form-group mt-2">
+          <label class="checkbox-custom">
+            <input type="checkbox" id="terms-agree" required>
+            <span>I agree to the <a href="about.html">Food Safety Standards</a> and FoodBridge Terms of Service.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg mt-4" id="register-submit-btn">
+          Complete Registration <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+      </form>
+
+      <div class="text-center mt-6" style="font-size: var(--font-size-xs); color: var(--color-muted);">
+        Already registered on FoodBridge? <a href="login.html" class="font-bold text-secondary">Sign in here</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/seed-data.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const roleRadios = document.querySelectorAll("input[name='role']");
+      const roleCards = document.querySelectorAll(".role-picker-label");
+      const ngoFields = document.getElementById("ngo-fields");
+      const ngoNote = document.getElementById("ngo-pending-note");
+      const volFields = document.getElementById("volunteer-fields");
+      const nameLabel = document.getElementById("name-label-text");
+      const regForm = document.getElementById("register-form");
+      const submitBtn = document.getElementById("register-submit-btn");
+      const googleBtn = document.getElementById("google-register-btn");
+      const errorAlert = document.getElementById("register-error-alert");
+      const errorText = document.getElementById("register-error-text");
+
+      // Check URL query param for default role ?role=donor|ngo|volunteer
+      const params = new URLSearchParams(window.location.search);
+      const preRole = params.get("role");
+      if (preRole && ['donor', 'ngo', 'volunteer'].includes(preRole.toLowerCase())) {
+        const targetRadio = document.querySelector(`input[name='role'][value='${preRole.toLowerCase()}']`);
+        if (targetRadio) targetRadio.checked = true;
+      }
+
+      // Pre-fill name and email if redirected from Google login
+      const googleEmail = params.get("google_email");
+      const googleName = params.get("google_name");
+      if (googleEmail) {
+        const emailField = document.getElementById("reg-email");
+        if (emailField) emailField.value = decodeURIComponent(googleEmail);
+      }
+      if (googleName) {
+        const nameField = document.getElementById("reg-name");
+        if (nameField) nameField.value = decodeURIComponent(googleName);
+      }
+
+      function updateRoleUI() {
+        let selectedRole = "donor";
+        roleRadios.forEach(r => {
+          if (r.checked) selectedRole = r.value;
+        });
+
+        roleCards.forEach(card => {
+          const radio = card.querySelector("input[name='role']");
+          if (radio.checked) {
+            card.style.borderColor = "var(--color-secondary)";
+            card.style.backgroundColor = "var(--color-light-green)";
+          } else {
+            card.style.borderColor = "var(--color-border)";
+            card.style.backgroundColor = "#fff";
+          }
+        });
+
+        if (selectedRole === "ngo") {
+          ngoFields.style.display = "block";
+          ngoNote.style.display = "block";
+          volFields.style.display = "none";
+          nameLabel.textContent = "Organization / Charity Name";
+          document.getElementById("reg-ngo-reg").required = true;
+        } else if (selectedRole === "volunteer") {
+          ngoFields.style.display = "none";
+          ngoNote.style.display = "none";
+          volFields.style.display = "block";
+          nameLabel.textContent = "Full Legal Name";
+          document.getElementById("reg-ngo-reg").required = false;
+        } else {
+          // donor
+          ngoFields.style.display = "none";
+          ngoNote.style.display = "none";
+          volFields.style.display = "none";
+          nameLabel.textContent = "Business or Restaurant Name";
+          document.getElementById("reg-ngo-reg").required = false;
+        }
+      }
+
+      roleRadios.forEach(r => r.addEventListener("change", updateRoleUI));
+      updateRoleUI();
+
+      // Quick Google Registration
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+          errorAlert.style.display = "none";
+          let selectedRole = "donor";
+          roleRadios.forEach(r => {
+            if (r.checked) selectedRole = r.value;
+          });
+
+          const additionalFields = {
+            name: document.getElementById("reg-name").value.trim(),
+            phone: document.getElementById("reg-phone").value.trim(),
+            city: document.getElementById("reg-city").value.trim() || "San Francisco",
+            address: document.getElementById("reg-address").value.trim(),
+            regNumber: document.getElementById("reg-ngo-reg")?.value.trim() || "",
+            contactPerson: document.getElementById("reg-ngo-contact")?.value.trim() || "",
+            vehicle: document.getElementById("reg-vol-vehicle")?.value || ""
+          };
+
+          googleBtn.disabled = true;
+          googleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registering via Google...';
+
+          try {
+            const res = await window.foodBridgeAuth.loginWithGoogle(selectedRole, additionalFields);
+            const user = res.user;
+            window.showToast(`Welcome to FoodBridge, ${user.name}!`, "success");
+
+            setTimeout(() => {
+              window.foodBridgeAuth.redirectByRole(user.role);
+            }, 500);
+          } catch (err) {
+            errorText.textContent = err.message || "Google registration failed.";
+            errorAlert.style.display = "block";
+            googleBtn.disabled = false;
+            googleBtn.innerHTML = '<svg class="google-icon" viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg> Sign up with Google (Using Selected Role Below)';
+          }
+        });
+      }
+
+      // Email/Password Form submission
+      regForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorAlert.style.display = "none";
+
+        const pass = document.getElementById("reg-password").value;
+        const confirmPass = document.getElementById("reg-confirm-password").value;
+
+        if (pass !== confirmPass) {
+          errorText.textContent = "Passwords do not match.";
+          errorAlert.style.display = "block";
+          return;
+        }
+
+        let selectedRole = "donor";
+        roleRadios.forEach(r => {
+          if (r.checked) selectedRole = r.value;
+        });
+
+        const adminCode = document.getElementById("reg-admin-code")?.value.trim() || "";
+        if (adminCode === "FOODBRIDGE_ADMIN_2026") {
+          selectedRole = "admin";
+        }
+
+        const userData = {
+          name: document.getElementById("reg-name").value,
+          email: document.getElementById("reg-email").value,
+          phone: document.getElementById("reg-phone").value,
+          city: document.getElementById("reg-city").value,
+          address: document.getElementById("reg-address").value,
+          password: pass,
+          confirmPassword: confirmPass,
+          role: selectedRole,
+          regNumber: document.getElementById("reg-ngo-reg")?.value || "",
+          contactPerson: document.getElementById("reg-ngo-contact")?.value || "",
+          vehicle: document.getElementById("reg-vol-vehicle")?.value || "",
+          adminInviteCode: adminCode
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+
+        try {
+          const user = await window.foodBridgeAuth.register(userData);
+          window.showToast("Account successfully registered! Logging you in...", "success");
+
+          setTimeout(() => {
+            window.foodBridgeAuth.redirectByRole(user.role);
+          }, 600);
+
+        } catch (err) {
+          errorText.textContent = err.message || "Registration failed.";
+          errorAlert.style.display = "block";
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Complete Registration <i class="fa-solid fa-arrow-right"></i>';
+        }
+      });
+    });
+
+    function togglePassVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const isPass = input.type === "password";
+      input.type = isPass ? "text" : "password";
+      btn.innerHTML = isPass ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+    }
+  </script>
+</body>
+</html>

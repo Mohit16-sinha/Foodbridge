@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – FoodBridge Surplus Food Network</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body style="background: radial-gradient(circle at 50% 12%, rgba(232, 245, 238, 0.75) 0%, #F9F8F3 75%); min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          Food<span class="accent">Bridge</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="available-food.html" class="nav-link">Available Food</a>
+          <a href="how-it-works.html" class="nav-link">How It Works</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <a href="register.html" class="btn btn-primary btn-sm">Join FoodBridge</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+    <div class="auth-container" style="max-width: 500px; width: 100%;">
+      
+      <!-- Interactive Top Role Switcher -->
+      <div class="auth-role-tabs">
+        <button type="button" class="auth-role-tab active" id="tab-member" title="For Donors, NGOs and Volunteer Couriers">
+          <i class="fa-solid fa-users"></i>
+          <span>Member Sign In</span>
+        </button>
+        <button type="button" class="auth-role-tab" id="tab-admin" title="For Platform Staff, Administrators & Auditors">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Admin Portal</span>
+          <span class="auth-staff-badge">Staff</span>
+        </button>
+      </div>
+
+      <div class="auth-card" style="box-shadow: 0 20px 45px -10px rgba(17, 51, 43, 0.12), 0 2px 10px rgba(34, 113, 80, 0.04);">
+        
+        <!-- =========================================================================
+             PANEL 1: COMMUNITY MEMBER SIGN IN (Donor / NGO / Volunteer)
+             ========================================================================= -->
+        <div id="panel-member" class="auth-panel active">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="logo-icon" style="width: 48px; height: 48px; margin: 0 auto 1rem; font-size: 1.35rem; border-radius: var(--radius-md);">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem; letter-spacing: -0.02em;">
+              Welcome Back
+            </h1>
+            <p style="font-size: var(--font-size-sm); color: var(--color-muted);">
+              Sign in to access your surplus food dashboard
+            </p>
+          </div>
+
+          <div id="login-error-alert" class="admin-auth-alert error" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i> <span id="login-error-text">Invalid credentials.</span>
+          </div>
+
+          <!-- Google Sign-In Button -->
+          <button type="button" class="btn btn-google btn-full mb-3" id="google-login-btn">
+            <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+            </svg>
+            Continue with Google
+          </button>
+
+          <div class="auth-divider">
+            <span>or sign in with email</span>
+          </div>
+
+          <form id="login-form" autocomplete="off">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Email Address</label>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center mb-1">
+                <label class="form-label" for="login-password" style="margin: 0;">Password</label>
+              </div>
+              <div class="input-icon-wrapper" style="position: relative;">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+                <button type="button" class="password-toggle-btn" id="toggle-password" aria-label="Toggle password visibility">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-5" style="font-size: var(--font-size-xs);">
+              <label class="checkbox-custom">
+                <input type="checkbox" id="remember-me" checked> Remember me
+              </label>
+              <a href="contact.html" style="color: var(--color-muted);">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-lg" id="login-submit-btn">
+              Sign In to FoodBridge <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <div class="text-center mt-6" style="font-size: var(--font-size-xs); color: var(--color-muted);">
+            Don't have an account yet? <a href="register.html" class="font-bold text-secondary">Register here</a>
+          </div>
+        </div>
+
+        <!-- =========================================================================
+             PANEL 2: PLATFORM ADMINISTRATOR CONSOLE
+             ========================================================================= -->
+        <div id="panel-admin" class="auth-panel">
+          <div style="text-align: center; margin-bottom: 1.75rem;">
+            <div class="admin-auth-emblem">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem; letter-spacing: -0.02em;">
+              Platform Administration
+            </h2>
+            <p style="font-size: var(--font-size-xs); color: var(--color-muted); max-width: 360px; margin: 0 auto; line-height: 1.5;">
+              Restricted console for system oversight, NGO audits & platform staff.
+            </p>
+          </div>
+
+          <!-- Sub-Segmented Control (Sign In vs Create Admin) -->
+          <div class="admin-segmented-control mb-4">
+            <button type="button" class="admin-segment-btn active" id="subtab-admin-login">
+              <i class="fa-solid fa-key text-secondary"></i> Admin Sign In
+            </button>
+            <button type="button" class="admin-segment-btn" id="subtab-admin-create">
+              <i class="fa-solid fa-user-shield text-secondary"></i> Create Admin Account
+            </button>
+          </div>
+
+          <div id="admin-alert" class="admin-auth-alert" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i> <span id="admin-alert-text">Message</span>
+          </div>
+
+          <!-- Sub-form A: Admin Sign In -->
+          <form id="admin-login-form" autocomplete="off">
+            <div class="form-group">
+              <label class="form-label" for="panel-admin-email">Administrator Email</label>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input type="email" id="panel-admin-email" class="form-control" placeholder="Enter administrator email" required autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="panel-admin-password">Master Password</label>
+              <div class="input-icon-wrapper" style="position: relative;">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="panel-admin-password" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('panel-admin-password', this)" aria-label="Toggle password visibility">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-5" style="font-size: var(--font-size-xs);">
+              <label class="checkbox-custom">
+                <input type="checkbox" id="admin-remember" checked> Keep session active
+              </label>
+              <span style="color: var(--color-muted); font-size: 0.725rem;"><i class="fa-solid fa-shield-check text-secondary"></i> 256-bit Encrypted</span>
+            </div>
+
+            <button type="submit" class="btn btn-full btn-lg admin-submit-btn" id="panel-admin-submit">
+              Sign In to Admin Console <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <!-- Sub-form B: Create Admin Account -->
+          <form id="admin-create-form" style="display: none;" autocomplete="off">
+            <div class="form-group">
+              <label class="form-label" for="panel-create-name">Full Legal / Admin Name <span class="required">*</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" id="panel-create-name" class="form-control" placeholder="Enter full name" required autocomplete="off">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-group">
+                <label class="form-label" for="panel-create-email">Admin Email <span class="required">*</span></label>
+                <input type="email" id="panel-create-email" class="form-control" placeholder="Enter administrator email" required autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="panel-create-phone">Phone <span class="required">*</span></label>
+                <input type="tel" id="panel-create-phone" class="form-control" placeholder="Enter phone number" required autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center mb-1">
+                <label class="form-label" for="panel-create-code" style="margin: 0;">Platform Authorization Key <span class="required">*</span></label>
+                <span class="badge badge-success" style="font-size: 0.65rem;"><i class="fa-solid fa-shield-check"></i> Master Key</span>
+              </div>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-key input-icon"></i>
+                <input type="text" id="panel-create-code" class="form-control" value="FOODBRIDGE_ADMIN_2026" placeholder="Enter platform authorization key" required style="font-family: monospace; font-weight: 700; letter-spacing: 0.04em; background: rgba(34, 113, 80, 0.05); border-color: rgba(34, 113, 80, 0.3);">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-group">
+                <label class="form-label" for="panel-create-password">Password <span class="required">*</span></label>
+                <div class="input-icon-wrapper" style="position: relative;">
+                  <input type="password" id="panel-create-password" class="form-control" placeholder="At least 6 chars" minlength="6" required autocomplete="new-password">
+                  <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('panel-create-password', this)">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="panel-create-confirm">Confirm <span class="required">*</span></label>
+                <div class="input-icon-wrapper" style="position: relative;">
+                  <input type="password" id="panel-create-confirm" class="form-control" placeholder="Repeat" minlength="6" required autocomplete="new-password">
+                  <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('panel-create-confirm', this)">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-full btn-lg admin-submit-btn mt-2" id="panel-create-submit">
+              Create Administrator Account <i class="fa-solid fa-shield-check"></i>
+            </button>
+          </form>
+
+          <div class="text-center mt-6 pt-4" style="border-top: 1px solid rgba(17, 51, 43, 0.08); font-size: var(--font-size-xs); color: var(--color-muted);">
+            Need regular donor or NGO access? <a href="javascript:void(0)" id="switch-to-member" class="font-bold text-secondary">Switch to Member Sign In</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/seed-data.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const isPass = input.type === "password";
+      input.type = isPass ? "text" : "password";
+      btn.innerHTML = isPass ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Main Panels & Tabs
+      const tabMember = document.getElementById("tab-member");
+      const tabAdmin = document.getElementById("tab-admin");
+      const panelMember = document.getElementById("panel-member");
+      const panelAdmin = document.getElementById("panel-admin");
+      const switchToMemberLink = document.getElementById("switch-to-member");
+
+      // Sub-Tabs for Admin
+      const subtabAdminLogin = document.getElementById("subtab-admin-login");
+      const subtabAdminCreate = document.getElementById("subtab-admin-create");
+      const adminLoginForm = document.getElementById("admin-login-form");
+      const adminCreateForm = document.getElementById("admin-create-form");
+      const adminAlert = document.getElementById("admin-alert");
+      const adminAlertText = document.getElementById("admin-alert-text");
+
+      // Member Form Elements
+      const loginForm = document.getElementById("login-form");
+      const emailInput = document.getElementById("login-email");
+      const passInput = document.getElementById("login-password");
+      const togglePassBtn = document.getElementById("toggle-password");
+      const errorAlert = document.getElementById("login-error-alert");
+      const errorText = document.getElementById("login-error-text");
+      const submitBtn = document.getElementById("login-submit-btn");
+      const googleBtn = document.getElementById("google-login-btn");
+
+      // Reset forms so autocomplete does not pollute inputs
+      if (loginForm) loginForm.reset();
+      if (adminLoginForm) adminLoginForm.reset();
+      if (adminCreateForm) adminCreateForm.reset();
+
+      // Top Tab Switcher: Member vs Admin
+      function activateMemberTab() {
+        tabMember.classList.add("active");
+        tabAdmin.classList.remove("active");
+        panelMember.classList.add("active");
+        panelAdmin.classList.remove("active");
+        hideAdminAlert();
+      }
+
+      function activateAdminTab() {
+        tabAdmin.classList.add("active");
+        tabMember.classList.remove("active");
+        panelAdmin.classList.add("active");
+        panelMember.classList.remove("active");
+      }
+
+      tabMember.addEventListener("click", activateMemberTab);
+      tabAdmin.addEventListener("click", activateAdminTab);
+      if (switchToMemberLink) switchToMemberLink.addEventListener("click", activateMemberTab);
+
+      // Check URL query parameters (e.g. login.html?tab=admin)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("tab") === "admin") {
+        activateAdminTab();
+      }
+
+      // Admin Sub-Tab Switching (Sign In vs Create)
+      subtabAdminLogin.addEventListener("click", () => {
+        subtabAdminLogin.classList.add("active");
+        subtabAdminCreate.classList.remove("active");
+        adminLoginForm.style.display = "block";
+        adminCreateForm.style.display = "none";
+        hideAdminAlert();
+      });
+
+      subtabAdminCreate.addEventListener("click", () => {
+        subtabAdminCreate.classList.add("active");
+        subtabAdminLogin.classList.remove("active");
+        adminCreateForm.style.display = "block";
+        adminLoginForm.style.display = "none";
+        hideAdminAlert();
+      });
+
+      function showAdminAlert(msg, isSuccess = false) {
+        adminAlertText.textContent = msg;
+        adminAlert.className = `admin-auth-alert ${isSuccess ? 'success' : 'error'}`;
+        adminAlert.style.display = "flex";
+      }
+
+      function hideAdminAlert() {
+        adminAlert.style.display = "none";
+      }
+
+      // Password Toggle for Member Form
+      if (togglePassBtn) {
+        togglePassBtn.addEventListener("click", () => {
+          const isPassword = passInput.type === "password";
+          passInput.type = isPassword ? "text" : "password";
+          togglePassBtn.innerHTML = isPassword ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+        });
+      }
+
+      // Google Sign-In Trigger
+      if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+          errorAlert.style.display = "none";
+          googleBtn.disabled = true;
+          googleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting with Google...';
+
+          try {
+            const res = await window.foodBridgeAuth.loginWithGoogle();
+            
+            if (res.requiresRole) {
+              window.showToast("Account not found. Please choose your role to register.", "info");
+              setTimeout(() => {
+                const emailParam = encodeURIComponent(res.fbUser.email || "");
+                const nameParam = encodeURIComponent(res.fbUser.displayName || "");
+                window.location.href = `register.html?google_email=${emailParam}&google_name=${nameParam}`;
+              }, 600);
+            } else {
+              window.showToast(`Welcome back, ${res.user.name}!`, "success");
+              const redirect = urlParams.get("redirect");
+              setTimeout(() => {
+                if (redirect) {
+                  window.location.href = decodeURIComponent(redirect);
+                } else {
+                  window.foodBridgeAuth.redirectByRole(res.user.role);
+                }
+              }, 400);
+            }
+          } catch (err) {
+            errorText.textContent = err.message || "Google Sign-In failed.";
+            errorAlert.style.display = "flex";
+            googleBtn.disabled = false;
+            googleBtn.innerHTML = '<svg class="google-icon" viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/></svg> Continue with Google';
+          }
+        });
+      }
+
+      // Member Form Submit
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorAlert.style.display = "none";
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...';
+
+        try {
+          const user = await window.foodBridgeAuth.login(emailInput.value, passInput.value);
+          window.showToast(`Welcome back, ${user.name}!`, "success");
+
+          const redirect = urlParams.get("redirect");
+
+          setTimeout(() => {
+            if (redirect) {
+              window.location.href = decodeURIComponent(redirect);
+            } else {
+              window.foodBridgeAuth.redirectByRole(user.role);
+            }
+          }, 400);
+
+        } catch (err) {
+          errorText.textContent = err.message || "Failed to sign in.";
+          errorAlert.style.display = "flex";
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Sign In to FoodBridge <i class="fa-solid fa-arrow-right"></i>';
+        }
+      });
+
+      // Admin Form Submit (Sign In)
+      adminLoginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        hideAdminAlert();
+
+        const email = document.getElementById("panel-admin-email").value.trim();
+        const pass = document.getElementById("panel-admin-password").value;
+        const panelSubmitBtn = document.getElementById("panel-admin-submit");
+
+        panelSubmitBtn.disabled = true;
+        panelSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating Admin...';
+
+        try {
+          const user = await window.foodBridgeAuth.login(email, pass);
+
+          if (user.role.toLowerCase() !== "admin") {
+            throw new Error(`Access Denied: The account "${email}" has role "${user.role.toUpperCase()}" and is not authorized to access the Admin Console.`);
+          }
+
+          showAdminAlert(`Access Granted. Welcome, ${user.name}! Redirecting...`, true);
+          window.showToast("Admin credentials verified!", "success");
+
+          setTimeout(() => {
+            window.location.href = "/admin/dashboard.html";
+          }, 500);
+
+        } catch (err) {
+          showAdminAlert(err.message || "Failed to authenticate administrator.", false);
+          panelSubmitBtn.disabled = false;
+          panelSubmitBtn.innerHTML = 'Sign In to Admin Console <i class="fa-solid fa-arrow-right"></i>';
+        }
+      });
+
+      // Admin Form Submit (Create Admin)
+      adminCreateForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        hideAdminAlert();
+
+        const name = document.getElementById("panel-create-name").value.trim();
+        const email = document.getElementById("panel-create-email").value.trim();
+        const phone = document.getElementById("panel-create-phone").value.trim();
+        const code = document.getElementById("panel-create-code").value.trim();
+        const pass = document.getElementById("panel-create-password").value;
+        const confirm = document.getElementById("panel-create-confirm").value;
+        const createSubmitBtn = document.getElementById("panel-create-submit");
+
+        if (pass !== confirm) {
+          showAdminAlert("Passwords do not match.", false);
+          return;
+        }
+
+        if (code !== "FOODBRIDGE_ADMIN_2026") {
+          showAdminAlert("Invalid Platform Master Key. Admin accounts require the authorized master authorization code.", false);
+          return;
+        }
+
+        createSubmitBtn.disabled = true;
+        createSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Initializing Administrator...';
+
+        try {
+          const newUser = await window.foodBridgeAuth.register({
+            name,
+            email,
+            phone,
+            password: pass,
+            confirmPassword: confirm,
+            role: "admin",
+            adminInviteCode: code,
+            city: "San Francisco",
+            address: "FoodBridge Platform Headquarters"
+          });
+
+          showAdminAlert(`Administrator account successfully created for ${newUser.name}! Opening Console...`, true);
+          window.showToast("Administrator registered successfully in Firebase!", "success");
+
+          setTimeout(() => {
+            window.location.href = "/admin/dashboard.html";
+          }, 700);
+
+        } catch (err) {
+          showAdminAlert(err.message || "Failed to create administrator account.", false);
+          createSubmitBtn.disabled = false;
+          createSubmitBtn.innerHTML = 'Create Administrator Account <i class="fa-solid fa-shield-check"></i>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

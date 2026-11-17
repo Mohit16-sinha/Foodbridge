@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Support – FoodBridge Surplus Food Network</title>
+  <meta name="description" content="Get in touch with FoodBridge for donor onboarding, NGO partnerships, volunteer support, or food safety inquiries.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          Food<span class="accent">Bridge</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="available-food.html" class="nav-link">Available Food</a>
+          <a href="how-it-works.html" class="nav-link">How It Works</a>
+          <a href="contact.html" class="nav-link active">Contact</a>
+        </div>
+
+        <div class="nav-actions" id="navbar-actions">
+          <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Join FoodBridge</a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="available-food.html" class="nav-link">Available Food</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="flex gap-2 mt-4" id="mobile-nav-actions">
+        <a href="login.html" class="btn btn-outline btn-full">Login</a>
+        <a href="register.html" class="btn btn-primary btn-full">Join FoodBridge</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section style="background: radial-gradient(circle at 85% 20%, rgba(234, 244, 232, 0.9) 0%, rgba(248, 247, 240, 0.6) 100%); padding: 4.5rem 0 3.5rem;">
+    <div class="container text-center">
+      <span class="section-tag">Get in Touch</span>
+      <h1 class="section-title">We’re Here to Help You Fight Food Waste</h1>
+      <p class="section-subtitle" style="max-width: 650px; margin: 0 auto;">
+        Have questions about food safety guidelines, donor onboarding, NGO verification, or volunteering? Reach out to our community team.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info -->
+  <section style="padding: 5rem 0; background: #fff;">
+    <div class="container">
+      <div class="grid grid-cols-2 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        
+        <!-- Contact Form -->
+        <div class="card" style="padding: 2.25rem;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.5rem;">Send Us a Message</h2>
+          <p style="font-size: var(--font-size-sm); color: var(--color-muted); margin-bottom: 1.5rem;">
+            Fill out the form below and a representative will reply within 24 hours.
+          </p>
+
+          <form id="contact-form">
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="contact-name" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address <span class="required">*</span></label>
+              <input type="email" id="contact-email" class="form-control" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">I am a...</label>
+              <select id="contact-role" class="form-select">
+                <option value="donor">Food Donor (Restaurant / Hotel / Caterer)</option>
+                <option value="ngo">NGO or Community Kitchen Representative</option>
+                <option value="volunteer">Volunteer or Courier</option>
+                <option value="partner">Corporate / Grant Partner</option>
+                <option value="other">General Community Member</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message <span class="required">*</span></label>
+              <textarea id="contact-message" class="form-textarea" rows="4" placeholder="How can we assist you?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg">
+              Send Message <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Channels & FAQs -->
+        <div>
+          <div class="card mb-6" style="padding: 2rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.25rem;">
+              Direct Support Channels
+            </h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--color-light-green); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-text-dark); font-size: var(--font-size-sm);">Emergency Surplus Hotline</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--color-muted);">For large banquet or event surplus requiring urgent dispatch:</div>
+                  <a href="tel:+18005553663" style="font-weight: 700; color: var(--color-secondary);">+1 (800) 555-FOOD</a>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #EBF8FF; color: #3182CE; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-text-dark); font-size: var(--font-size-sm);">Email Support</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--color-muted);">General inquiries, verification & partnerships:</div>
+                  <a href="mailto:support@foodbridge.network" style="font-weight: 700; color: #3182CE;">support@foodbridge.network</a>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: #FEFCBF; color: #B7791F; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-text-dark); font-size: var(--font-size-sm);">Community Logistics Hub</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--color-muted);">
+                    1 FoodBridge Plaza, Suite 400<br>San Francisco, CA 94105
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick FAQ -->
+          <div class="card" style="padding: 1.75rem;">
+            <h4 style="font-weight: 700; color: var(--color-primary); margin-bottom: 0.75rem;">Frequently Asked Questions</h4>
+            <div style="font-size: var(--font-size-sm); margin-bottom: 0.85rem;">
+              <strong>Is there any fee to donate or claim food?</strong>
+              <div class="text-muted" style="font-size: var(--font-size-xs);">No. FoodBridge is completely free for all donors, charities, and volunteers.</div>
+            </div>
+            <div style="font-size: var(--font-size-sm);">
+              <strong>How long does NGO approval take?</strong>
+              <div class="text-muted" style="font-size: var(--font-size-xs);">Our administration reviews non-profit registration numbers within 24 hours. In Demo Mode, approvals can be simulated instantly from the Admin Dashboard!</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+            Food<span class="accent">Bridge</span>
+          </a>
+          <p>Connecting surplus food with communities that need it. Donate, volunteer, and build a world with less waste.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <div class="footer-links">
+            <a href="available-food.html">Available Food</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Portals</h4>
+          <div class="footer-links">
+            <a href="donor/dashboard.html">Donor Dashboard</a>
+            <a href="ngo/dashboard.html">NGO Portal</a>
+            <a href="volunteer/dashboard.html">Volunteer Portal</a>
+            <a href="admin/dashboard.html">Admin Oversight</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Safety</h4>
+          <div class="footer-links">
+            <a href="about.html">Safety Declarations</a>
+            <a href="contact.html">Report Food Safety</a>
+            <a href="about.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 FoodBridge Surplus Food Network. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/seed-data.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+

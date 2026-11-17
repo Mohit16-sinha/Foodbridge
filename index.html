@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodBridge – Surplus Food Donation & Redistribution Network</title>
+  <meta name="description" content="FoodBridge connects surplus food from restaurants, hotels, and donors with verified NGOs and volunteer couriers to eliminate hunger and reduce food waste.">
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Public Header Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          Food<span class="accent">Bridge</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="available-food.html" class="nav-link">Available Food</a>
+          <a href="how-it-works.html" class="nav-link">How It Works</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <div class="nav-actions" id="navbar-actions">
+          <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Join FoodBridge</a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="available-food.html" class="nav-link">Available Food</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="flex gap-2 mt-4" id="mobile-nav-actions">
+        <a href="login.html" class="btn btn-outline btn-full">Login</a>
+        <a href="register.html" class="btn btn-primary btn-full">Join FoodBridge</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-seedling"></i>
+            Surplus Food Redistribution Platform
+          </div>
+          <h1 class="hero-title">
+            Good Food Deserves a <span class="highlight">Second Chance.</span>
+          </h1>
+          <p class="hero-description">
+            Connect surplus food with communities that need it. Donate, volunteer, and help us build a world with less food waste.
+          </p>
+          <div class="hero-actions">
+            <a href="donor/add-food.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-hand-holding-heart"></i> Donate Food
+            </a>
+            <a href="available-food.html" class="btn btn-outline btn-lg">
+              <i class="fa-solid fa-bowl-food"></i> Find Food
+            </a>
+          </div>
+          <div class="hero-features-list">
+            <div class="hero-feature-item">
+              <i class="fa-solid fa-circle-check"></i> 100% Free Platform
+            </div>
+            <div class="hero-feature-item">
+              <i class="fa-solid fa-circle-check"></i> Certified Food Safety
+            </div>
+            <div class="hero-feature-item">
+              <i class="fa-solid fa-circle-check"></i> Real-Time Courier Dispatch
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-main-card">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=80" alt="Volunteer providing nutritious food to community">
+            <div class="hero-card-overlay">
+              <div class="hero-overlay-tag">Our Living Mission</div>
+              <div class="hero-overlay-title">"Turning Surplus Food into Someone's Next Meal."</div>
+            </div>
+          </div>
+
+          <!-- Floating Stat Badge 1 -->
+          <div class="floating-stat-badge floating-badge-1">
+            <div class="floating-icon">
+              <i class="fa-solid fa-bowl-rice"></i>
+            </div>
+            <div class="floating-stat-text">
+              <div class="num">12,450+</div>
+              <div class="label">Meals Saved & Served</div>
+            </div>
+          </div>
+
+          <!-- Floating Stat Badge 2 -->
+          <div class="floating-stat-badge floating-badge-2">
+            <div class="floating-icon gold">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <div class="floating-stat-text">
+              <div class="num">100% Verified</div>
+              <div class="label">Approved NGO Partners</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Metrics Strip -->
+  <section class="impact-strip">
+    <div class="container">
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-number">12.4<span>k+</span></div>
+          <div class="impact-label">Meals Redistributed</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-number">85<span>+</span></div>
+          <div class="impact-label">Verified NGO Kitchens</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-number">120<span>+</span></div>
+          <div class="impact-label">Active Food Donors</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-number">4.8<span>t</span></div>
+          <div class="impact-label">CO₂ Emissions Prevented</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="workflow-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Simple & Reliable</span>
+        <h2 class="section-title">How FoodBridge Works</h2>
+        <p class="section-subtitle">
+          From surplus inventory to community plates in four seamless, transparent steps.
+        </p>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3 class="step-title">Donor Lists Surplus</h3>
+          <p class="step-description">Restaurants, hotels, or caterers specify quantity, pickup deadline, allergens, and storage type.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3 class="step-title">NGO Claims Needed Qty</h3>
+          <p class="step-description">Verified charities browse local listings and request exact quantities for their daily meal distribution.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3 class="step-title">Volunteer Dispatched</h3>
+          <p class="step-description">A community volunteer accepts the route, picks up the sealed food, and transports it swiftly.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <h3 class="step-title">Nourished Community</h3>
+          <p class="step-description">Donation is marked complete with full transparency, zero food waste, and verified impact logging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Roles Section -->
+  <section class="roles-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">One Platform, Three Pillars</span>
+        <h2 class="section-title">Built For Everyone Fighting Hunger</h2>
+        <p class="section-subtitle">
+          FoodBridge coordinates donors, charities, and couriers with tailored portals for seamless collaboration.
+        </p>
+      </div>
+
+      <div class="roles-grid">
+        <!-- Donor Card -->
+        <div class="role-card donor">
+          <div class="role-icon-box">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3 class="role-title">For Food Donors</h3>
+          <p class="role-description">
+            Restaurants, bakeries, supermarkets, hotels, and event organizers with surplus edible food.
+          </p>
+          <div class="role-features">
+            <div class="role-feature"><i class="fa-solid fa-check"></i> List surplus meals in under 60 seconds</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Set pickup deadlines & allergen advisories</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Real-time courier pickup tracking</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Tax-deductible donation records</div>
+          </div>
+          <a href="register.html?role=donor" class="btn btn-outline btn-full">Become a Food Donor</a>
+        </div>
+
+        <!-- NGO Card -->
+        <div class="role-card ngo">
+          <div class="role-icon-box">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+          </div>
+          <h3 class="role-title">For Verified NGOs</h3>
+          <p class="role-description">
+            Homeless shelters, community kitchens, elder care centers, and youth programs feeding people in need.
+          </p>
+          <div class="role-features">
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Browse surplus food mapped in real-time</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Request custom portions to prevent overflow</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Coordinated door-to-door volunteer delivery</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Safe cold-chain protocol guidance</div>
+          </div>
+          <a href="register.html?role=ngo" class="btn btn-secondary btn-full">Register Your NGO</a>
+        </div>
+
+        <!-- Volunteer Card -->
+        <div class="role-card volunteer">
+          <div class="role-icon-box">
+            <i class="fa-solid fa-bicycle"></i>
+          </div>
+          <h3 class="role-title">For Volunteers</h3>
+          <p class="role-description">
+            Local individuals, cyclists, and drivers who believe no good food should ever go to waste.
+          </p>
+          <div class="role-features">
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Accept nearby pickup missions on your schedule</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Turn 30 minutes into someone's meal</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Clear turn-by-turn route details & contacts</div>
+            <div class="role-feature"><i class="fa-solid fa-check"></i> Track your cumulative community impact</div>
+          </div>
+          <a href="register.html?role=volunteer" class="btn btn-accent btn-full">Volunteer Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Available Donations -->
+  <section class="featured-section" style="background-color: var(--color-bg);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Urgent Surplus</span>
+        <h2 class="section-title">Featured Food Donations</h2>
+        <p class="section-subtitle">
+          Fresh surplus meals currently available for collection by verified charitable partners.
+        </p>
+      </div>
+
+      <div class="food-cards-grid" id="landing-featured-food">
+        <!-- Rendered dynamically from seed data -->
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="available-food.html" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-map-location-dot"></i> View All Available Food On Map
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose FoodBridge -->
+  <section class="why-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Built For Trust</span>
+        <h2 class="section-title">Why FoodBridge Stands Out</h2>
+        <p class="section-subtitle">
+          Food safety, vetted organizations, and automated distribution ensure high efficiency with zero risk.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-shield-virus"></i></div>
+          <h3 class="feature-box-title">Strict Food Safety Standards</h3>
+          <p class="feature-box-desc">Preparation times, pickup deadlines, allergen warnings, and thermal storage instructions are validated on every listing.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-building-circle-check"></i></div>
+          <h3 class="feature-box-title">Verified Non-Profit Partners</h3>
+          <p class="feature-box-desc">Every charity undergoes administrative documentation verification before gaining permission to request donations.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-route"></i></div>
+          <h3 class="feature-box-title">Real-Time Volunteer Routing</h3>
+          <p class="feature-box-desc">Integrated logistics assign verified volunteer couriers automatically once donors approve requests.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+          <h3 class="feature-box-title">Anti-Overselling Inventory</h3>
+          <p class="feature-box-desc">Portion reservations prevent double allocations, ensuring organizations get exactly what was agreed upon.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-chart-pie"></i></div>
+          <h3 class="feature-box-title">Verifiable Impact Reporting</h3>
+          <p class="feature-box-desc">Transparent live dashboards measure meals saved, emissions diverted, and meals served for community reports.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-box-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="feature-box-title">Lightweight & Fast</h3>
+          <p class="feature-box-desc">Engineered for extreme performance and ease of use, with seamless fallback offline and demo capability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2 class="cta-title">Ready to Turn Surplus Food into Someone's Next Meal?</h2>
+        <p class="cta-description">
+          Whether you run a kitchen with extra meals, a charity serving families, or have an hour to deliver food, join FoodBridge today.
+        </p>
+        <div class="cta-buttons">
+          <a href="register.html?role=donor" class="btn btn-accent btn-lg">
+            <i class="fa-solid fa-hand-holding-heart"></i> Donate Food Now
+          </a>
+          <a href="register.html?role=volunteer" class="btn btn-outline-white btn-lg">
+            <i class="fa-solid fa-person-biking"></i> Sign Up As Volunteer
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+            Food<span class="accent">Bridge</span>
+          </a>
+          <p>
+            FoodBridge is an open surplus food donation and redistribution platform connecting food donors, verified charities, and volunteer couriers to eliminate hunger.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <div class="footer-links">
+            <a href="available-food.html">Available Food</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact & Support</a>
+            <a href="admin-login.html" style="color: var(--color-accent-gold);"><i class="fa-solid fa-shield-halved"></i> Staff Admin Portal</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Portals</h4>
+          <div class="footer-links">
+            <a href="donor/dashboard.html">Donor Portal</a>
+            <a href="ngo/dashboard.html">NGO Portal</a>
+            <a href="volunteer/dashboard.html">Volunteer Portal</a>
+            <a href="admin/dashboard.html">Admin Oversight</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Stay Connected</h4>
+          <p style="font-size: var(--font-size-xs); color: #cbd5e0; margin-bottom: 1rem;">
+            Subscribe to our weekly redistribution updates and impact bulletins.
+          </p>
+          <form id="newsletter-form" class="flex flex-col gap-2">
+            <input type="email" placeholder="Your email address" class="form-control" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #fff;" required>
+            <button type="submit" class="btn btn-secondary btn-sm">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 FoodBridge Surplus Food Network. All rights reserved.</div>
+        <div class="flex gap-4">
+          <a href="about.html" style="color: #a0aec0;">Privacy Policy</a>
+          <a href="about.html" style="color: #a0aec0;">Food Safety Terms</a>
+          <a href="contact.html" style="color: #a0aec0;">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/seed-data.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Populate Featured Food on landing page
+    document.addEventListener("DOMContentLoaded", async () => {
+      const featuredContainer = document.getElementById("landing-featured-food");
+      if (!featuredContainer) return;
+
+      const listings = await window.foodShareDB.getFoodListings({ availableOnly: true });
+      const topListings = listings.slice(0, 3);
+
+      featuredContainer.innerHTML = topListings.map(l => {
+        const deadlineDate = new Date(l.pickupDeadline).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' });
+        return `
+          <div class="food-card">
+            <div class="food-card-image-wrap">
+              <img src="${l.imageUrl}" alt="${l.foodName}" loading="lazy">
+              <div class="food-card-badges">
+                <span class="food-badge-category">${l.category}</span>
+                <span class="food-badge-storage"><i class="fa-regular fa-snowflake"></i> ${l.storageType}</span>
+              </div>
+            </div>
+            <div class="food-card-body">
+              <h3 class="food-card-title">${l.foodName}</h3>
+              <div class="food-card-donor"><i class="fa-solid fa-store"></i> ${l.donorName}</div>
+              <div class="food-card-meta-grid">
+                <div class="food-meta-item">
+                  <span class="food-meta-label">Available</span>
+                  <span class="food-meta-value qty">${l.availableQuantity} ${l.unit}</span>
+                </div>
+                <div class="food-meta-item">
+                  <span class="food-meta-label">Location</span>
+                  <span class="food-meta-value">${l.city}</span>
+                </div>
+              </div>
+              <div class="food-card-deadline safe">
+                <i class="fa-regular fa-clock"></i> Pickup by: ${deadlineDate}
+              </div>
+              <div class="food-card-footer">
+                <a href="available-food.html" class="btn btn-outline btn-full btn-sm">
+                  View Details & Request
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    });
+  </script>
+</body>
+</html>
+
